@@ -78,4 +78,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             throw new RuntimeException(e);
         }
     }
+
+    // Register employee
+    public boolean registerEmployee(String employeeId, String firstName, String middleInitial,
+                                    String lastName, String dateHired, String password, double basicSalary) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Check if employee already exists
+        if (isEmployeeExists(employeeId)) {
+            return false;
+        }
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_EMPLOYEE_ID, employeeId);
+        values.put(COLUMN_EMPLOYEE_FIRST_NAME, firstName);
+        values.put(COLUMN_EMPLOYEE_MIDDLE_INITIAL, middleInitial);
+        values.put(COLUMN_EMPLOYEE_LAST_NAME, lastName);
+        values.put(COLUMN_EMPLOYEE_DATE_HIRED, dateHired);
+        values.put(COLUMN_EMPLOYEE_PASSWORD_HASH, hashPassword(password));
+        values.put(COLUMN_EMPLOYEE_BASIC_SALARY, basicSalary);
+
+        long result = db.insert(TABLE_EMPLOYEE, null, values);
+        return result != -1;
+    }
+
+    private boolean isEmployeeExists(String employeeId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {COLUMN_EMPLOYEE_ID};
+        String selection = COLUMN_EMPLOYEE_ID + " = ?";
+        String[] selectionArgs = {employeeId};
+
+        Cursor cursor = db.query(TABLE_EMPLOYEE, columns, selection, selectionArgs, null, null, null);
+
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
+    }
 }
