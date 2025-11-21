@@ -38,8 +38,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_EMPLOYEE_FIRST_NAME + " NVARCHAR(100) NOT NULL,"
             + COLUMN_EMPLOYEE_MIDDLE_INITIAL + " CHAR(1),"
             + COLUMN_EMPLOYEE_LAST_NAME + " NVARCHAR(100) NOT NULL,"
-            + COLUMN_EMPLOYEE_DATE_HIRED + " DATE NOT NULL"
-            + COLUMN_EMPLOYEE_PASSWORD_HASH + " VARCHAR(255) NOT NULL"
+            + COLUMN_EMPLOYEE_DATE_HIRED + " DATE NOT NULL,"
+            + COLUMN_EMPLOYEE_PASSWORD_HASH + " VARCHAR(255) NOT NULL,"
             + COLUMN_EMPLOYEE_BASIC_SALARY + " DECIMAL(10,2) NOT NULL"
             + ")";
 
@@ -114,4 +114,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return exists;
     }
+
+    // Validate employee login
+    public boolean validateEmployeeLogin(String employeeId, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {COLUMN_EMPLOYEE_PASSWORD_HASH};
+        String selection = COLUMN_EMPLOYEE_ID + " = ?";
+        String[] selectionArgs = {employeeId};
+
+        Cursor cursor = db.query(TABLE_EMPLOYEE, columns, selection, selectionArgs, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            String storedHash = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_PASSWORD_HASH));
+            cursor.close();
+            return storedHash.equals(hashPassword(password));
+        }
+        cursor.close();
+        return false;
+    }
+
+
 }
