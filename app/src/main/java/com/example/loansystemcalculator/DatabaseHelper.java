@@ -133,5 +133,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    // Get employee date hired
+    public LocalDate getEmployeeDateHired(String employeeId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {COLUMN_EMPLOYEE_DATE_HIRED};
+        String selection = COLUMN_EMPLOYEE_ID + " = ?";
+        String[] selectionArgs = {employeeId};
 
+        Cursor cursor = db.query(TABLE_EMPLOYEE, columns, selection, selectionArgs, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            String dateString = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMPLOYEE_DATE_HIRED));
+            cursor.close();
+            // Parse the date string to LocalDate
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            return LocalDate.parse(dateString, formatter);
+        }
+        cursor.close();
+        return null;
+    }
 }
