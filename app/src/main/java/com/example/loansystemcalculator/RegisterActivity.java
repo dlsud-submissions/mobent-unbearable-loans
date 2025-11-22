@@ -139,13 +139,11 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        // For now, using default values for missing fields
-        // In a real app, you'd have these fields in your form
-        String firstName = "First"; // Default value - should be collected from user
-        String middleInitial = null; // Default value - should be collected from user
-        String lastName = "Last"; // Default value - should be collected from user
+        String firstName = "First";
+        String middleInitial = null;
+        String lastName = "Last";
 
-        // Use current date as date hired (you might want a date picker for this)
+        // Use current date as date hired
         String dateHired = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
         // Register employee using DatabaseHelper
