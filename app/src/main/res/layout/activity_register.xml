@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_brown"
@@ -44,13 +45,13 @@
         android:fontFamily="@font/righteous"
         android:text="Loans"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="80px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.083"
-        android:textColor="@color/white" />
+        app:layout_constraintVertical_bias="0.083" />
 
     <TextView
         android:id="@+id/textView"
@@ -58,8 +59,8 @@
         android:layout_height="67dp"
         android:fontFamily="@font/righteous"
         android:text="unBEARable"
-        android:textColor="@color/white"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="100px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +79,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/wave_bottom"/>
+        app:srcCompat="@drawable/wave_bottom" />
 
     <EditText
         android:id="@+id/etEmployeeId"
@@ -86,8 +87,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/rounded_edittext"
-        android:hint="Employee ID"
         android:fontFamily="@font/poppins"
+        android:hint="Employee ID"
         android:inputType="textEmailAddress"
         android:padding="16dp"
         android:textColor="#333333"
@@ -105,9 +106,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/rounded_edittext"
+        android:fontFamily="@font/poppins"
         android:hint="Basic Salary"
         android:inputType="numberDecimal"
-        android:fontFamily="@font/poppins"
         android:padding="16dp"
         android:textColor="#333333"
         android:textColorHint="#999999"
@@ -116,7 +117,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.531"/>
+        app:layout_constraintVertical_bias="0.531" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -124,12 +125,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/rounded_edittext"
+        android:fontFamily="@font/poppins"
         android:hint="Password"
         android:inputType="textPassword"
         android:padding="16dp"
         android:textColor="#333333"
         android:textColorHint="#999999"
-        android:fontFamily="@font/poppins"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -143,11 +144,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/rounded_edittext"
+        android:fontFamily="@font/poppins"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         android:padding="16dp"
         android:textColor="#333333"
-        android:fontFamily="@font/poppins"
         android:textColorHint="#999999"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
