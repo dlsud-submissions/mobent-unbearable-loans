@@ -37,29 +37,18 @@ public class RegisterActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
         initializeViews();
         setupClickListeners();
-        updateFieldHints(); // Update hints to match employee registration
+        updateFieldHints();
     }
 
     private void initializeViews() {
-        // Map the existing EditText fields to our variables
-        etEmployeeId = findViewById(R.id.etEmployeeId); // Was "Email"
-        etBasicSalary = findViewById(R.id.etBasicSalary); // Was "Basic Salary" (keep as is)
-        etPassword = findViewById(R.id.etPassword); // Was "Password" (keep as is)
-        etConfirmPassword = findViewById(R.id.etConfirmPassword); // Was "Confirm Password" (keep as is)
+        // Map the existing fields
+        etEmployeeId = findViewById(R.id.etEmployeeId);
+        etBasicSalary = findViewById(R.id.etBasicSalary);
+        etPassword = findViewById(R.id.etPassword);
+        etConfirmPassword = findViewById(R.id.etConfirmPassword);
 
         btnRegister = findViewById(R.id.btnRegister);
         btnSignIn = findViewById(R.id.btnSignIn);
-
-        // We need to add more fields programmatically or modify the XML
-        // For now, we'll use the available fields and add the missing ones later
-        // Let's repurpose the fields:
-        // etEmployeeId = Employee ID
-        // etBasicSalary = Basic Salary (keep)
-        // etPassword = Password (keep)
-        // etConfirmPassword = Confirm Password (keep)
-
-        // We'll need to add firstName, middleInitial, lastName, dateHired fields
-        // For now, we'll use default values and focus on the core functionality
     }
 
     private void updateFieldHints() {
