@@ -112,7 +112,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardApplyLoan"
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
                 android:foreground="?android:attr/selectableItemBackground"
@@ -158,7 +158,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardTransactionHistory"
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
                 android:foreground="?android:attr/selectableItemBackground"

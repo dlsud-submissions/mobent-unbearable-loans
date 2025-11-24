@@ -86,7 +86,7 @@
         android:textSize="14sp" />
 
     <!-- Grid Layout for Navigation Cards -->
-    <androidx.gridlayout.widget.GridLayout
+    <GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -184,7 +184,7 @@
 
         </androidx.cardview.widget.CardView>
 
-    </androidx.gridlayout.widget.GridLayout>
+    </GridLayout>
 
     <!-- Logout Button at Top Right -->
     <ImageButton
