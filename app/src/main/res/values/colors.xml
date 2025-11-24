@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+
     <color name="white">#FFFFFFFF</color>
+    <color name="light_beige">#F5F0E6</color>
+    <color name="primary_brown">#6D4C41</color>
+    <color name="dark_brown">#4E342E</color>
+    <color name="accent_brown">#8D6E63</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+
+
+    <color name="brown_lightest">#A1887F</color>
+    <color name="brown_lighter">#8D6E63</color>
+    <color name="brown_medium">#795548</color>
+    <color name="brown_dark">#5D4037</color>
+    <color name="brown_darker">#4E342E</color>
+    <color name="brown_darkest">#3E2723</color>
+
+
+    <color name="beige_light">#EDE0D4</color>
+    <color name="beige_medium">#D7CCC8</color>
+    <color name="beige_dark">#BCAAA4</color>
+
+
+    <color name="brown_shadow_light">#5A3E36</color>
+    <color name="brown_shadow_dark">#3B241A</color>
 </resources>

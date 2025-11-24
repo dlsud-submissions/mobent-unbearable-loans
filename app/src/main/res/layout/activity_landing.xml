@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_brown"
+    tools:context=".LandingActivity">
+
+    <!-- Wave Top -->
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:scaleY="-1"
+        app:srcCompat="@drawable/wave_top" />
+
+    <!-- App Name - unBEARable -->
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/righteous"
+        android:text="unBEARable"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <!-- Loans Text -->
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/righteous"
+        android:text="Loans"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_below="@id/textView5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_image"
+        android:clipToOutline="true"
+        app:srcCompat="@drawable/logo2" />
+
+    <!-- Welcome Text -->
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/righteous"
+        android:text="Welcome"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
+    <!-- Register Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegister"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/button_register"
+        android:fontFamily="@font/poppins"
+        android:text="Register"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null" />
+
+    <!-- Login Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogin"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:layout_below="@id/btnRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_register2"
+        android:fontFamily="@font/poppins"
+        android:text="Login"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null" />
+
+    <!-- Admin Login Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAdminLogin"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:layout_below="@id/btnLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_register"
+        android:fontFamily="@font/poppins"
+        android:text="Admin Login"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null" />
+
+    <!-- Wave Bottom -->
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/wave_bottom" />
+
+</RelativeLayout>
