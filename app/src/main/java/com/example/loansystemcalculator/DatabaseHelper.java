@@ -99,14 +99,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Register employee
-    public boolean registerEmployee(String employeeId, String firstName, String middleInitial,
+    // Register employee with auto-generated ID
+    public boolean registerEmployee(String firstName, String middleInitial,
                                     String lastName, String dateHired, String password, double basicSalary) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // Check if employee already exists
-        if (isEmployeeExists(employeeId)) {
-            return false;
-        }
+        // Generate employee ID
+        String employeeId = generateEmployeeId(firstName, lastName, middleInitial);
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_EMPLOYEE_ID, employeeId);
@@ -188,6 +187,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return 0.0;
+    }
+
+    // Generate employee ID
+    public String generateEmployeeId(String firstName, String lastName, String middleInitial) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Get first 3 letters of last name (uppercase)
+        String lastPart = lastName.length() >= 3 ?
+                lastName.substring(0, 3).toUpperCase() :
+                String.format("%-3s", lastName).toUpperCase().trim();
+
+        // Get first letter of first name (uppercase)
+        String firstPart = firstName.length() >= 1 ?
+                firstName.substring(0, 1).toUpperCase() :
+                "X";
+
+        // Get middle initial (uppercase) or "X" if null/empty
+        String middlePart = (middleInitial != null && !middleInitial.isEmpty()) ?
+                middleInitial.toUpperCase() : "X";
+
+        String baseId = lastPart + firstPart + middlePart;
+        String employeeId = baseId + "001"; // Start with 001
+
+        // Check if this ID already exists and increment if needed
+        int counter = 1;
+        while (isEmployeeExists(employeeId)) {
+            counter++;
+            employeeId = baseId + String.format("%03d", counter);
+
+            // Safety check to prevent infinite loop
+            if (counter > 999) {
+                throw new RuntimeException("Too many employees with similar names");
+            }
+        }
+
+        return employeeId;
     }
 
     /**----------

@@ -148,7 +148,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Register employee using DatabaseHelper
         boolean success = dbHelper.registerEmployee(
-                employeeId,
                 firstName,
                 middleInitial,
                 lastName,
