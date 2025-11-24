@@ -18,21 +18,15 @@ import java.util.Locale;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText etEmployeeId, etFirstName, etMiddleInitial, etLastName;
-    private EditText etDateHired, etBasicSalary, etPassword, etConfirmPassword;
+    private EditText etFirstName, etMiddleInitial, etLastName;
+    private EditText etBasicSalary, etPassword, etConfirmPassword;
     private MaterialButton btnRegister, btnSignIn;
     private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         dbHelper = new DatabaseHelper(this);
         initializeViews();
@@ -41,8 +35,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
-        // Map the existing fields
-        etEmployeeId = findViewById(R.id.etEmployeeId);
+        etFirstName = findViewById(R.id.etFirstName);
+        etLastName = findViewById(R.id.etLastName);
+        etMiddleInitial = findViewById(R.id.etMiddleInitial);
         etBasicSalary = findViewById(R.id.etBasicSalary);
         etPassword = findViewById(R.id.etPassword);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
@@ -52,9 +47,14 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void updateFieldHints() {
-        // Update hints to match employee registration fields
-        etEmployeeId.setHint("Employee ID");
-        etEmployeeId.setInputType(android.text.InputType.TYPE_CLASS_TEXT);
+        etFirstName.setHint("First Name");
+        etFirstName.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+
+        etLastName.setHint("Last Name");
+        etLastName.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+
+        etMiddleInitial.setHint("Middle Initial");
+        etMiddleInitial.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
 
         etBasicSalary.setHint("Basic Salary");
         etBasicSalary.setInputType(android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -83,15 +83,29 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerEmployee() {
-        String employeeId = etEmployeeId.getText().toString().trim();
+        String firstName = etFirstName.getText().toString().trim();
+        String lastName = etLastName.getText().toString().trim();
+        String middleInitial = etMiddleInitial.getText().toString().trim();
         String basicSalaryStr = etBasicSalary.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
         String confirmPassword = etConfirmPassword.getText().toString().trim();
 
         // Validation
-        if (employeeId.isEmpty()) {
-            etEmployeeId.setError("Please enter employee ID");
-            etEmployeeId.requestFocus();
+        if (firstName.isEmpty()) {
+            etFirstName.setError("Please enter first name");
+            etFirstName.requestFocus();
+            return;
+        }
+
+        if (lastName.isEmpty()) {
+            etLastName.setError("Please enter last name");
+            etLastName.requestFocus();
+            return;
+        }
+
+        if (middleInitial.length() > 1) {
+            etMiddleInitial.setError("Middle initial should be one character only");
+            etMiddleInitial.requestFocus();
             return;
         }
 
@@ -139,14 +153,15 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        String firstName = "First";
-        String middleInitial = null;
-        String lastName = "Last";
-
         // Use current date as date hired
         String dateHired = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-        // Register employee using DatabaseHelper
+        // If middle initial is empty, set to null
+        if (middleInitial.isEmpty()) {
+            middleInitial = null;
+        }
+
+        // Register employee using DatabaseHelper (auto-generates employee ID)
         boolean success = dbHelper.registerEmployee(
                 firstName,
                 middleInitial,
@@ -157,11 +172,12 @@ public class RegisterActivity extends AppCompatActivity {
         );
 
         if (success) {
-            showToast("Registration successful!");
-            navigateToHome(employeeId);
+            // Generate the same employee ID to display to user
+            String generatedEmployeeId = dbHelper.generateEmployeeId(firstName, lastName, middleInitial);
+            showToast("Registration successful! Your Employee ID: " + generatedEmployeeId);
+            navigateToHome(generatedEmployeeId);
         } else {
-            showToast("Registration failed. Employee ID might already exist.");
-            etEmployeeId.requestFocus();
+            showToast("Registration failed. Please try again.");
         }
     }
 
@@ -179,7 +195,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
