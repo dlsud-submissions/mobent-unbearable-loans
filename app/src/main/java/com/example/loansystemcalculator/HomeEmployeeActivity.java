@@ -51,19 +51,19 @@ public class HomeEmployeeActivity extends AppCompatActivity {
     }
 
     private void setupClickListeners() {
-        cardApplyLoan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToLoanApplicationForm();
-            }
-        });
-
-        cardTransactionHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToLoanApplicationsHistory();
-            }
-        });
+//        cardApplyLoan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                navigateToLoanApplicationForm();
+//            }
+//        });
+//
+//        cardTransactionHistory.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                navigateToLoanApplicationsHistory();
+//            }
+//        });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
