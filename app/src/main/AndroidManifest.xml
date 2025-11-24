@@ -12,15 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoanSystemCalculator">
         <activity
-            android:name=".HomeAdminActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginAdminActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HomeEmployeeActivity"
-            android:exported="false" />
-        <activity
             android:name=".LandingActivity"
             android:exported="true">
             <intent-filter>
@@ -29,6 +20,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeEmployeeActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
