@@ -66,6 +66,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PROCESSED_BY_ADMIN_ID = "processedByAdminId";
     private static final String COLUMN_APPLICATION_DATE = "applicationDate";
 
+    /**----------
+     Create table statements
+     ----------**/
+
     // Create Employee table
     private static final String CREATE_EMPLOYEE_TABLE = "CREATE TABLE " + TABLE_EMPLOYEE + "("
             + COLUMN_EMPLOYEE_ID + " VARCHAR(15) PRIMARY KEY,"
@@ -83,6 +87,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_ADMIN_PASSWORD_HASH + " VARCHAR(255) NOT NULL"
             + ")";
 
+    // Create LoanType table
+    private static final String CREATE_LOAN_TYPE_TABLE = "CREATE TABLE " + TABLE_LOAN_TYPE + "("
+            + COLUMN_LOAN_TYPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_TYPE_NAME + " NVARCHAR(50) NOT NULL UNIQUE,"
+            + COLUMN_MIN_AMOUNT + " DECIMAL(10,2),"
+            + COLUMN_MAX_AMOUNT + " DECIMAL(10,2),"
+            + COLUMN_SERVICE_CHARGE_RATE + " DECIMAL(5,4)"
+            + ")";
+
+    // Create InterestRate table
+    private static final String CREATE_INTEREST_RATE_TABLE = "CREATE TABLE " + TABLE_INTEREST_RATE + "("
+            + COLUMN_RATE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_LOAN_TYPE_ID + " INTEGER NOT NULL,"
+            + COLUMN_MIN_MONTHS + " INTEGER NOT NULL,"
+            + COLUMN_MAX_MONTHS + " INTEGER NOT NULL,"
+            + COLUMN_INTEREST_RATE + " DECIMAL(5,4) NOT NULL,"
+            + "FOREIGN KEY(" + COLUMN_LOAN_TYPE_ID + ") REFERENCES " + TABLE_LOAN_TYPE + "(" + COLUMN_LOAN_TYPE_ID + ")"
+            + ")";
+
+    // Create LoanApplication table
+    private static final String CREATE_LOAN_APPLICATION_TABLE = "CREATE TABLE " + TABLE_LOAN_APPLICATION + "("
+            + COLUMN_LOAN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_EMPLOYEE_ID + " VARCHAR(15) NOT NULL,"
+            + COLUMN_LOAN_TYPE_ID + " INTEGER NOT NULL,"
+            + COLUMN_REQUESTED_AMOUNT + " DECIMAL(10,2) NOT NULL,"
+            + COLUMN_MONTHS_TO_PAY + " INTEGER NOT NULL,"
+            + COLUMN_STATUS + " NVARCHAR(50) NOT NULL DEFAULT 'Pending',"
+            + COLUMN_INTEREST_RATE_APPLIED + " DECIMAL(5,4),"
+            + COLUMN_INTEREST_AMOUNT + " DECIMAL(10,2),"
+            + COLUMN_SERVICE_CHARGE_AMOUNT + " DECIMAL(10,2),"
+            + COLUMN_TAKE_HOME_LOAN + " DECIMAL(10,2),"
+            + COLUMN_TOTAL_AMOUNT_DUE + " DECIMAL(10,2),"
+            + COLUMN_PROCESSED_BY_ADMIN_ID + " VARCHAR(15),"
+            + COLUMN_APPLICATION_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP,"
+            + "FOREIGN KEY(" + COLUMN_EMPLOYEE_ID + ") REFERENCES " + TABLE_EMPLOYEE + "(" + COLUMN_EMPLOYEE_ID + "),"
+            + "FOREIGN KEY(" + COLUMN_LOAN_TYPE_ID + ") REFERENCES " + TABLE_LOAN_TYPE + "(" + COLUMN_LOAN_TYPE_ID + "),"
+            + "FOREIGN KEY(" + COLUMN_PROCESSED_BY_ADMIN_ID + ") REFERENCES " + TABLE_ADMIN + "(" + COLUMN_ADMIN_ID + ")"
+            + ")";
+
+    /**----------
+     Abstract class methods (SQLiteOpenHelper)
+     ----------**/
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -91,6 +138,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_EMPLOYEE_TABLE);
         db.execSQL(CREATE_ADMIN_TABLE);
+        db.execSQL(CREATE_LOAN_TYPE_TABLE);
+        db.execSQL(CREATE_INTEREST_RATE_TABLE);
+        db.execSQL(CREATE_LOAN_APPLICATION_TABLE);
 
         // Insert default admin account
         insertDefaultAdmin(db);
