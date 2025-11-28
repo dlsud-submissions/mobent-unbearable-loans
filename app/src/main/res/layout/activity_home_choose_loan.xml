@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/gradient_bg">
+
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/righteous"
+        android:text="unBEARable"
+        android:textAlignment="center"
+        android:textColor="@color/dark_brown"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/righteous"
+        android:text="Loans"
+        android:textAlignment="center"
+        android:textColor="@color/dark_brown"
+        android:textSize="34sp" />
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="1"
+        android:rowCount="3"
+        android:layout_centerInParent="true">
+
+        <!-- 1st card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardEmergency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="Emergency Loan"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"/>
+
+                <!-- Hidden  1st card -->
+                <LinearLayout
+                    android:id="@+id/expandableEmergency"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Payable in 6 months or Cash after 6 months."
+                        android:fontFamily="@font/poppins"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="5K up to 25K"
+                        android:fontFamily="@font/poppins"
+                        android:textSize="14sp"/>
+
+                    <Button
+                        android:id="@+id/btnEmergency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apply Now"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/dark_brown"
+                        android:fontFamily="@font/poppins"
+                        android:padding="8dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 2nd card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSpecial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="Special Loan"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"/>
+
+                <!-- Hidden 2nd card -->
+                <LinearLayout
+                    android:id="@+id/expandableSpecial"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:fontFamily="@font/poppins"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Member is already 5 years in service or above."
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="50K up to 100K"
+                        android:textSize="14sp"/>
+
+                    <Button
+                        android:id="@+id/btnSpecial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apply Now"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/dark_brown"
+                        android:padding="8dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 3rd card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:fontFamily="@font/poppins"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="Regular Loan"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"/>
+
+                <!-- Hidden 3rd card -->
+                <LinearLayout
+                    android:id="@+id/expandableRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Regular Loan"
+                        android:textSize="14sp"/>
+                    <Button
+                        android:id="@+id/btnRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apply Now"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/dark_brown"
+                        android:padding="8dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
+</RelativeLayout>

@@ -51,12 +51,12 @@ public class HomeEmployeeActivity extends AppCompatActivity {
     }
 
     private void setupClickListeners() {
-//        cardApplyLoan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                navigateToLoanApplicationForm();
-//            }
-//        });
+        cardApplyLoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToChooseLoan();
+            }
+        });
 //
 //        cardTransactionHistory.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -72,6 +72,7 @@ public class HomeEmployeeActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void updateUI() {
         tvWelcomeEmployee.setText("Welcome, Employee!");
@@ -104,6 +105,12 @@ public class HomeEmployeeActivity extends AppCompatActivity {
         finish();
     }
 
+
+    private void navigateToChooseLoan() {
+        Intent intent = new Intent(HomeEmployeeActivity.this, ChooseLoanActivity.class);
+        intent.putExtra("EMPLOYEE_ID", employeeId);
+        startActivity(intent);
+    }
     @Override
     public void onBackPressed() {
         logout();

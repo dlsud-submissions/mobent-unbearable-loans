@@ -5,18 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_brown"
+    android:background="@drawable/gradient_bg"
     tools:context=".HomeEmployeeActivity">
 
     <!-- Wave Top -->
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:scaleY="-1"
-        android:contentDescription="Wave decoration"
-        app:srcCompat="@drawable/wave_top" />
 
     <!-- App Name - unBEARable -->
     <TextView
@@ -28,7 +20,7 @@
         android:fontFamily="@font/righteous"
         android:text="unBEARable"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/dark_brown"
         android:textSize="50sp"
         android:textStyle="bold" />
 
@@ -43,7 +35,7 @@
         android:fontFamily="@font/righteous"
         android:text="Loans"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/dark_brown"
         android:textSize="34sp" />
 
     <!-- Logo -->
@@ -220,12 +212,5 @@
         app:tint="@color/white" />
 
     <!-- Wave Bottom -->
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:contentDescription="Wave decoration"
-        app:srcCompat="@drawable/wave_bottom" />
 
 </RelativeLayout>
