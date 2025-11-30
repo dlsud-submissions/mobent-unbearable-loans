@@ -33,7 +33,6 @@ public class LoanEmergencyActivity extends AppCompatActivity {
             return insets;
 
 
-
         });
 
         btnCalculate = findViewById(R.id.btnCalculate);
@@ -54,7 +53,7 @@ public class LoanEmergencyActivity extends AppCompatActivity {
 
                 // Validate loan amount range
                 if (loanAmount < 5000 || loanAmount > 25000) {
-                    Toast.makeText(LoanEmergencyActivity.this,"Loan amount must be between ₱5,000 and ₱25,000",Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoanEmergencyActivity.this, "Loan amount must be between ₱5,000 and ₱25,000", Toast.LENGTH_LONG).show();
                     textViewServiceCharge.setText("");
                     textViewTotalInterest.setText("");
                     return;
@@ -79,12 +78,12 @@ public class LoanEmergencyActivity extends AppCompatActivity {
             }
         });
 
-        btnBack.setOnClickListener(v->{
+        btnBack.setOnClickListener(v -> {
             Intent intent = new Intent(LoanEmergencyActivity.this, LoanChooseTypeActivity.class);
             startActivity(intent);
         });
-}
-
     }
+
+}
 
 
