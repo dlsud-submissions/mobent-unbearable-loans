@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoanSystemCalculator">
         <activity
+            android:name=".EmployeeLoanHistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoanRegularActivity"
             android:exported="false" />
         <activity
