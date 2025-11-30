@@ -6,21 +6,26 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    /**----------
-     Database Properties
-     ----------**/
+    /**
+     * ----------
+     * Database Properties
+     * ----------
+     **/
     private static final String DATABASE_NAME = "LoanSystemCalculator.db";
     private static final int DATABASE_VERSION = 2;
 
-    /**----------
-     Table Properties
-     ----------**/
+    /**
+     * ----------
+     * Table Properties
+     * ----------
+     **/
 
     // Employee table fields
     private static final String TABLE_EMPLOYEE = "Employee";
@@ -66,9 +71,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PROCESSED_BY_ADMIN_ID = "processedByAdminId";
     private static final String COLUMN_APPLICATION_DATE = "applicationDate";
 
-    /**----------
-     Create table statements
-     ----------**/
+    /**
+     * ----------
+     * Create table statements
+     * ----------
+     **/
 
     // Create Employee table
     private static final String CREATE_EMPLOYEE_TABLE = "CREATE TABLE " + TABLE_EMPLOYEE + "("
@@ -126,9 +133,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "FOREIGN KEY(" + COLUMN_PROCESSED_BY_ADMIN_ID + ") REFERENCES " + TABLE_ADMIN + "(" + COLUMN_ADMIN_ID + ")"
             + ")";
 
-    /**----------
-     Abstract class methods (SQLiteOpenHelper)
-     ----------**/
+    /**
+     * ----------
+     * Abstract class methods (SQLiteOpenHelper)
+     * ----------
+     **/
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -156,9 +165,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**----------
-     Employee Methods
-     ----------**/
+    /**
+     * ----------
+     * Employee Methods
+     * ----------
+     **/
 
     // Hash password using SHA-256
     private String hashPassword(String password) {
@@ -303,9 +314,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return employeeId;
     }
 
-    /**----------
-     Admin Methods
-     ----------**/
+    /**
+     * ----------
+     * Admin Methods
+     * ----------
+     **/
 
     // Insert default admin account
     private void insertDefaultAdmin(SQLiteDatabase db) {
@@ -349,9 +362,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_EMPLOYEE_LAST_NAME + ", " + COLUMN_EMPLOYEE_FIRST_NAME);
     }
 
-    /**----------
-     Loan Methods
-     ----------**/
+    /**
+     * ----------
+     * Loan Methods
+     * ----------
+     **/
 
     // Insert loan types method (Emergency, Special, Regular)
     private void insertDefaultLoanData(SQLiteDatabase db) {
@@ -463,6 +478,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return 0.0;
+    }
+
+    // Add this method to DatabaseHelper.java in the Loan Methods section
+
+    // Get all loan applications for a specific employee
+    public Cursor getEmployeeLoanApplications(String employeeId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT la." + COLUMN_LOAN_ID + ", " +
+                "lt." + COLUMN_TYPE_NAME + " as loanType, " +
+                "la." + COLUMN_REQUESTED_AMOUNT + ", " +
+                "la." + COLUMN_MONTHS_TO_PAY + ", " +
+                "la." + COLUMN_STATUS + ", " +
+                "la." + COLUMN_APPLICATION_DATE + ", " +
+                "la." + COLUMN_TOTAL_AMOUNT_DUE + ", " +
+                "la." + COLUMN_TAKE_HOME_LOAN + " " +
+                "FROM " + TABLE_LOAN_APPLICATION + " la " +
+                "INNER JOIN " + TABLE_LOAN_TYPE + " lt ON la." + COLUMN_LOAN_TYPE_ID + " = lt." + COLUMN_LOAN_TYPE_ID + " " +
+                "WHERE la." + COLUMN_EMPLOYEE_ID + " = ? " +
+                "ORDER BY la." + COLUMN_APPLICATION_DATE + " DESC";
+
+        return db.rawQuery(query, new String[]{employeeId});
     }
 
     public Cursor getAllLoanApplications() {
