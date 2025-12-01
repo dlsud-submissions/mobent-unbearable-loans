@@ -49,8 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:background="@color/light_blue">
+            android:padding="16dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -64,8 +63,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
@@ -89,8 +88,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
@@ -121,8 +120,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/cardAdminInfo"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@android:color/transparent"
         app:tabBackground="@drawable/tab_background_selector"
         app:tabGravity="fill"
@@ -130,15 +129,15 @@
         app:tabIndicatorHeight="3dp"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/dark_brown"
-        app:tabTextColor="@color/dark_brown_light" />
+        app:tabTextColor="@color/brown_lighter" />
 
     <!-- ViewPager for Tab Content -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tabLayout"
         android:layout_above="@id/btnBack"
+        android:layout_below="@id/tabLayout"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp" />
 
@@ -149,16 +148,15 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/btnBack"
         android:layout_margin="16dp"
+        android:visibility="gone"
         app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        android:visibility="gone">
+        app:cardElevation="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:background="@color/light_green">
+            android:padding="16dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -172,8 +170,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="8dp"
+                android:orientation="horizontal"
                 android:weightSum="3">
 
                 <TextView
@@ -244,8 +242,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_refresh_button"
-        android:scaleType="center"
         android:contentDescription="Refresh"
+        android:scaleType="center"
         app:srcCompat="@drawable/ic_refresh"
         app:tint="@color/white" />
 
