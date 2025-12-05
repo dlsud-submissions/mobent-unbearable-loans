@@ -54,14 +54,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"/>
 
-    <!-- Logo -->
+    <!-- Mascot Image (Changed from imageViewLogo) -->
     <ImageView
-        android:id="@+id/imageViewLogo"
+        android:id="@+id/mascotImage"
         android:layout_width="220dp"
         android:layout_height="200dp"
         android:background="@drawable/rounded_image"
         android:clipToOutline="true"
-        android:src="@drawable/logo2"
+        android:src="@drawable/mascot_0"
+        android:scaleType="centerCrop"
+        android:contentDescription="Animated Mascot"
         app:layout_constraintTop_toBottomOf="@id/textViewAdminLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +77,7 @@
         android:layout_margin="16dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
-        app:layout_constraintTop_toBottomOf="@id/imageViewLogo"
+        app:layout_constraintTop_toBottomOf="@id/mascotImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 

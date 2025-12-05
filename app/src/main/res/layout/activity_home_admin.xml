@@ -127,7 +127,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
-                        app:cardBackgroundColor="@color/brown_shadow_light"
+                        app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="20dp"
                         app:cardElevation="8dp">
 
@@ -144,7 +144,7 @@
                                 android:layout_marginTop="30dp"
                                 android:contentDescription="Process loans"
                                 app:srcCompat="@drawable/ic_loan_processing"
-                                app:tint="@color/white" />
+                                app:tint="@color/dark_brown" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -155,7 +155,7 @@
                                 android:fontFamily="@font/poppins"
                                 android:text="PROCESS\nLOANS"
                                 android:textAlignment="center"
-                                android:textColor="@color/white"
+                                android:textColor="@color/dark_brown"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -172,7 +172,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
-                        app:cardBackgroundColor="@color/brown_shadow_light"
+                        app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="20dp"
                         app:cardElevation="8dp">
 
@@ -189,7 +189,7 @@
                                 android:layout_marginTop="30dp"
                                 android:contentDescription="View loan applications"
                                 app:srcCompat="@drawable/ic_apply_loan"
-                                app:tint="@color/white" />
+                                app:tint="@color/dark_brown" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -200,7 +200,7 @@
                                 android:fontFamily="@font/poppins"
                                 android:text="VIEW LOAN\nAPPLICATIONS"
                                 android:textAlignment="center"
-                                android:textColor="@color/white"
+                                android:textColor="@color/dark_brown"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -293,7 +293,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/iconLoanAnalytics"
                                 android:layout_centerHorizontal="true"
-                                android:layout_marginTop="16dp"
+                                android:layout_marginTop="40dp"
                                 android:fontFamily="@font/poppins"
                                 android:text="LOAN\nANALYTICS"
                                 android:textAlignment="center"

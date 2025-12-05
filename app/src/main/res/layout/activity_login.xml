@@ -112,7 +112,6 @@
                 android:textColorHint="#999999"
                 android:textSize="16sp"
                 android:fontFamily="@font/poppins"
-                android:maxLength="20"
                 android:inputType="text"/>
 
             <!-- Employee ID Counter -->
@@ -130,8 +129,7 @@
                 android:textColor="#333333"
                 android:textColorHint="#999999"
                 android:textSize="16sp"
-                android:fontFamily="@font/poppins"
-                android:maxLength="20"/>
+                android:fontFamily="@font/poppins" />
 
             <!-- Password Counter -->
 

@@ -1,7 +1,6 @@
 package com.example.loansystemcalculator;
 
 import android.os.Bundle;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -9,17 +8,19 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.content.Intent;
 import android.view.View;
-import com.google.android.material.button.MaterialButton;
+
+import androidx.cardview.widget.CardView;
 
 public class LandingActivity extends AppCompatActivity {
 
-    private MaterialButton btnRegister, btnLogin, btnAdminLogin;
+    private CardView cardRegister, cardLogin, cardAdminLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_landing);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -34,49 +35,29 @@ public class LandingActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
-        btnRegister = findViewById(R.id.btnRegister);
-        btnLogin = findViewById(R.id.btnLogin);
-        btnAdminLogin = findViewById(R.id.btnAdminLogin);
+        cardRegister = findViewById(R.id.cardRegister);
+        cardLogin = findViewById(R.id.cardLogin);
+        cardAdminLogin = findViewById(R.id.btnAdminLogin);
     }
 
     private void setupClickListeners() {
-        // Register Button - Navigate to Employee Registration
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToEmployeeRegistration();
-            }
+
+        // Register Card
+        cardRegister.setOnClickListener(v -> {
+            Intent intent = new Intent(LandingActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
 
-        // Login Button - Navigate to Employee Login
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToEmployeeLogin();
-            }
+        // Login Card
+        cardLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(LandingActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
 
-        // Admin Login Button - Navigate to Admin Login
-        btnAdminLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToAdminLogin();
-            }
+        // Admin Login Card
+        cardAdminLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(LandingActivity.this, LoginAdminActivity.class);
+            startActivity(intent);
         });
-    }
-
-    private void navigateToEmployeeRegistration() {
-        Intent intent = new Intent(LandingActivity.this, RegisterActivity.class);
-        startActivity(intent);
-    }
-
-    private void navigateToEmployeeLogin() {
-        Intent intent = new Intent(LandingActivity.this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    private void navigateToAdminLogin() {
-        Intent intent = new Intent(LandingActivity.this, LoginAdminActivity.class);
-        startActivity(intent);
     }
 }

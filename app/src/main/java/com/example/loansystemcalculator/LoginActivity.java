@@ -26,16 +26,17 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView mascotImage;
     private boolean isPasswordFocused = false;
 
-    // Username mascot images (0-7 characters)
+    // Username mascot images (0-20+ characters, changes every 3 characters)
+    // This gives you 8 images: 0, 3, 6, 9, 12, 15, 18, 21+
     private int[] usernameImages = {
-            R.drawable.mascot_0,
-            R.drawable.mascot_1,
-            R.drawable.mascot_2,
-            R.drawable.mascot_3,
-            R.drawable.mascot_4,
-            R.drawable.mascot_5,
-            R.drawable.mascot_6,
-            R.drawable.mascot_7
+            R.drawable.mascot_0,    // 0-2 characters
+            R.drawable.mascot_1,    // 3-5 characters
+            R.drawable.mascot_2,    // 6-8 characters
+            R.drawable.mascot_3,    // 9-11 characters
+            R.drawable.mascot_4,    // 12-14 characters
+            R.drawable.mascot_5,    // 15-17 characters
+            R.drawable.mascot_6,    // 18-20 characters
+            R.drawable.mascot_7     // 21+ characters (stays at this)
     };
 
     // Password mascot images
@@ -144,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    // Changes image every 3 characters
+    // Changes image every 3 characters, stays at last image when 21+ characters
     private void updateMascotImage(int characterCount, boolean isPassword) {
         if (mascotImage == null) return;
 
@@ -157,8 +158,14 @@ public class LoginActivity extends AppCompatActivity {
         // Divide character count by 3 to change image every 3 characters
         int imageIndex = characterCount / 3;
 
-        // Make sure we don't exceed array bounds
-        imageIndex = Math.min(imageIndex, imagesToUse.length - 1);
+        // For username: Keep last image when at 21+ characters (index 7)
+        // For password: Keep last image when exceeding array length
+        if (!isPassword && characterCount >= 21) {
+            imageIndex = usernameImages.length - 1; // Stay at last image (mascot_7)
+        } else {
+            // Make sure we don't exceed array bounds
+            imageIndex = Math.min(imageIndex, imagesToUse.length - 1);
+        }
 
         // Change the image safely
         try {
