@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
 
     // Mascot animation variables
     private ImageView mascotImage;
-    private TextView textViewEmployeeCounter, textViewPasswordCounter;
     private boolean isPasswordFocused = false;
 
     // Username mascot images (0-7 characters)
@@ -67,10 +66,8 @@ public class LoginActivity extends AppCompatActivity {
         btnSignIn = findViewById(R.id.btnSignIn);
         btnRegister = findViewById(R.id.btnRegister);
 
-        // Initialize mascot views
+        // Initialize mascot image only
         mascotImage = findViewById(R.id.mascotImage);
-        textViewEmployeeCounter = findViewById(R.id.textViewEmployeeCounter);
-        textViewPasswordCounter = findViewById(R.id.textViewPasswordCounter);
 
         // Change hints to match employee login
         etEmployeeId.setHint("Employee ID");
@@ -90,11 +87,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 int length = s.length();
 
-                // Update counter if it exists
-                if (textViewEmployeeCounter != null) {
-                    textViewEmployeeCounter.setText(length + "/20");
-                }
-
                 // Update mascot image if not password focused
                 if (!isPasswordFocused) {
                     updateMascotImage(length, false);
@@ -113,11 +105,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 int length = s.length();
-
-                // Update counter if it exists
-                if (textViewPasswordCounter != null) {
-                    textViewPasswordCounter.setText(length + "/20");
-                }
 
                 // Update mascot image if password focused
                 if (isPasswordFocused) {
@@ -157,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    // UPDATED METHOD: Changes image every 3 characters
+    // Changes image every 3 characters
     private void updateMascotImage(int characterCount, boolean isPassword) {
         if (mascotImage == null) return;
 
@@ -167,11 +154,7 @@ public class LoginActivity extends AppCompatActivity {
         // Safety check: Make sure array is not empty
         if (imagesToUse.length == 0) return;
 
-        // CHANGED: Divide character count by 3 to change image every 3 characters
-        // 0-2 chars = image 0
-        // 3-5 chars = image 1
-        // 6-8 chars = image 2
-        // 9-11 chars = image 3, etc.
+        // Divide character count by 3 to change image every 3 characters
         int imageIndex = characterCount / 3;
 
         // Make sure we don't exceed array bounds

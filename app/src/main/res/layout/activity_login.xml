@@ -116,16 +116,6 @@
                 android:inputType="text"/>
 
             <!-- Employee ID Counter -->
-            <TextView
-                android:id="@+id/textViewEmployeeCounter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginBottom="12dp"
-                android:text="0/20"
-                android:textSize="12sp"
-                android:textColor="#666666"
-                android:fontFamily="@font/poppins"/>
 
             <!-- Password Input -->
             <EditText
@@ -144,15 +134,6 @@
                 android:maxLength="20"/>
 
             <!-- Password Counter -->
-            <TextView
-                android:id="@+id/textViewPasswordCounter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:text="0/20"
-                android:textSize="12sp"
-                android:textColor="#666666"
-                android:fontFamily="@font/poppins"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
