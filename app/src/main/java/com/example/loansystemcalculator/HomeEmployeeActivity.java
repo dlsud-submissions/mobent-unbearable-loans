@@ -51,26 +51,11 @@ public class HomeEmployeeActivity extends AppCompatActivity {
     }
 
     private void setupClickListeners() {
-        cardApplyLoan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToChooseLoan();
-            }
-        });
-//
-//        cardTransactionHistory.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                navigateToLoanApplicationsHistory();
-//            }
-//        });
+        cardApplyLoan.setOnClickListener(v -> navigateToLoanChooseType());
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout();
-            }
-        });
+        cardTransactionHistory.setOnClickListener(v -> navigateToLoanHistory());
+
+        btnLogout.setOnClickListener(v -> logout());
     }
 
 
@@ -79,17 +64,17 @@ public class HomeEmployeeActivity extends AppCompatActivity {
         tvEmployeeId.setText("Employee ID: " + employeeId);
     }
 
-//    private void navigateToLoanApplicationForm() {
-//        Intent intent = new Intent(HomeEmployeeActivity.this, EmployeeLoanApplicationFormActivity.class);
-//        intent.putExtra("EMPLOYEE_ID", employeeId);
-//        startActivity(intent);
-//    }
-//
-//    private void navigateToLoanApplicationsHistory() {
-//        Intent intent = new Intent(HomeEmployeeActivity.this, EmployeeLoanApplicationsHistoryActivity.class);
-//        intent.putExtra("EMPLOYEE_ID", employeeId);
-//        startActivity(intent);
-//    }
+    private void navigateToLoanChooseType() {
+        Intent intent = new Intent(HomeEmployeeActivity.this, LoanChooseTypeActivity.class);
+        intent.putExtra("EMPLOYEE_ID", employeeId);
+        startActivity(intent);
+    }
+
+    private void navigateToLoanHistory() {
+        Intent intent = new Intent(HomeEmployeeActivity.this, EmployeeLoanHistoryActivity.class);
+        intent.putExtra("EMPLOYEE_ID", employeeId);
+        startActivity(intent);
+    }
 
     private void navigateToEmployeeLogin() {
         Intent intent = new Intent(HomeEmployeeActivity.this, LoginActivity.class);
