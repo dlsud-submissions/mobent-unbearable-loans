@@ -3,6 +3,8 @@ package com.example.loansystemcalculator;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,8 @@ import androidx.fragment.app.Fragment;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class LoanListFragment extends Fragment {
@@ -25,6 +29,7 @@ public class LoanListFragment extends Fragment {
     private String filterType;
     private DatabaseHelper dbHelper;
     private LinearLayout loanListContainer;
+    private Handler mainHandler;
 
     public static LoanListFragment newInstance(String filterType, DatabaseHelper dbHelper) {
         LoanListFragment fragment = new LoanListFragment();
@@ -42,6 +47,7 @@ public class LoanListFragment extends Fragment {
         if (getArguments() != null) {
             filterType = getArguments().getString(ARG_FILTER_TYPE);
         }
+        mainHandler = new Handler(Looper.getMainLooper());
     }
 
     @Nullable
@@ -56,20 +62,41 @@ public class LoanListFragment extends Fragment {
     }
 
     private void loadLoans() {
-        loanListContainer.removeAllViews();
+        // Run database operations on a background thread
+        new Thread(() -> {
+            List<LoanApplication> loans = new ArrayList<>();
+            Cursor cursor = null;
+            try {
+                cursor = getCursorForFilter();
+                if (cursor != null && cursor.moveToFirst()) {
+                    do {
+                        LoanApplication loan = extractLoanFromCursor(cursor);
+                        loans.add(loan);
+                    } while (cursor.moveToNext());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+            }
 
-        Cursor cursor = getCursorForFilter();
-
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                LoanApplication loan = extractLoanFromCursor(cursor);
-                View loanItem = createLoanItemView(loan);
-                loanListContainer.addView(loanItem);
-            } while (cursor.moveToNext());
-            cursor.close();
-        } else {
-            showNoDataMessage();
-        }
+            // Update UI on main thread
+            mainHandler.post(() -> {
+                if (isAdded() && getView() != null) {
+                    loanListContainer.removeAllViews();
+                    if (!loans.isEmpty()) {
+                        for (LoanApplication loan : loans) {
+                            View loanItem = createLoanItemView(loan);
+                            loanListContainer.addView(loanItem);
+                        }
+                    } else {
+                        showNoDataMessage();
+                    }
+                }
+            });
+        }).start();
     }
 
     private Cursor getCursorForFilter() {
@@ -88,23 +115,59 @@ public class LoanListFragment extends Fragment {
     private LoanApplication extractLoanFromCursor(Cursor cursor) {
         LoanApplication loan = new LoanApplication();
 
+        // Set defaults in case of errors
+        loan.setLoanId(0);
+        loan.setEmployeeName("N/A");
+        loan.setLoanType("N/A");
+        loan.setRequestedAmount(0.0);
+        loan.setStatus("Unknown");
+        loan.setApplicationDate("N/A");
+        loan.setMonthsToPay(0);
+
         try {
             loan.setLoanId(cursor.getInt(cursor.getColumnIndexOrThrow("loanId")));
-            loan.setEmployeeName(cursor.getString(cursor.getColumnIndexOrThrow("employeeName")));
-            loan.setLoanType(cursor.getString(cursor.getColumnIndexOrThrow("loanType")));
-            loan.setRequestedAmount(cursor.getDouble(cursor.getColumnIndexOrThrow("requestedAmount")));
-            loan.setStatus(cursor.getString(cursor.getColumnIndexOrThrow("status")));
-            loan.setApplicationDate(cursor.getString(cursor.getColumnIndexOrThrow("applicationDate")));
-
-            // Try to get monthsToPay if available
-            try {
-                loan.setMonthsToPay(cursor.getInt(cursor.getColumnIndexOrThrow("monthsToPay")));
-            } catch (Exception e) {
-                loan.setMonthsToPay(0);
-            }
-
         } catch (Exception e) {
-            e.printStackTrace();
+            // Keep default
+        }
+
+        try {
+            String empName = cursor.getString(cursor.getColumnIndexOrThrow("employeeName"));
+            loan.setEmployeeName(empName != null ? empName : "N/A");
+        } catch (Exception e) {
+            // Keep default
+        }
+
+        try {
+            String loanType = cursor.getString(cursor.getColumnIndexOrThrow("loanType"));
+            loan.setLoanType(loanType != null ? loanType : "N/A");
+        } catch (Exception e) {
+            // Keep default
+        }
+
+        try {
+            loan.setRequestedAmount(cursor.getDouble(cursor.getColumnIndexOrThrow("requestedAmount")));
+        } catch (Exception e) {
+            // Keep default
+        }
+
+        try {
+            String status = cursor.getString(cursor.getColumnIndexOrThrow("status"));
+            loan.setStatus(status != null ? status : "Unknown");
+        } catch (Exception e) {
+            // Keep default
+        }
+
+        try {
+            String appDate = cursor.getString(cursor.getColumnIndexOrThrow("applicationDate"));
+            loan.setApplicationDate(appDate != null ? appDate : "N/A");
+        } catch (Exception e) {
+            // Keep default
+        }
+
+        try {
+            loan.setMonthsToPay(cursor.getInt(cursor.getColumnIndexOrThrow("monthsToPay")));
+        } catch (Exception e) {
+            // Keep default
         }
 
         return loan;
@@ -196,6 +259,7 @@ public class LoanListFragment extends Fragment {
     }
 
     private String formatDate(String dateString) {
+        if (dateString == null || dateString.equals("N/A")) return "N/A";
         try {
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
             SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());

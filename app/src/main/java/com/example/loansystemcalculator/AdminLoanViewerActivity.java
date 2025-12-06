@@ -119,29 +119,39 @@ public class AdminLoanViewerActivity extends AppCompatActivity {
 
     private void loadLoanStatistics() {
         new Thread(() -> {
-            Cursor allCursor = dbHelper.getAllLoanApplications();
-            Cursor pendingCursor = dbHelper.getPendingLoanApplications();
-            Cursor approvedCursor = dbHelper.getApprovedLoanApplications();
-            Cursor deniedCursor = dbHelper.getDeniedLoanApplications();
+            int total = 0, pending = 0, approved = 0, denied = 0;
+            try {
+                Cursor allCursor = dbHelper.getAllLoanApplications();
+                Cursor pendingCursor = dbHelper.getPendingLoanApplications();
+                Cursor approvedCursor = dbHelper.getApprovedLoanApplications();
+                Cursor deniedCursor = dbHelper.getDeniedLoanApplications();
 
-            int total = allCursor != null ? allCursor.getCount() : 0;
-            int pending = pendingCursor != null ? pendingCursor.getCount() : 0;
-            int approved = approvedCursor != null ? approvedCursor.getCount() : 0;
-            int denied = deniedCursor != null ? deniedCursor.getCount() : 0;
+                total = allCursor != null ? allCursor.getCount() : 0;
+                pending = pendingCursor != null ? pendingCursor.getCount() : 0;
+                approved = approvedCursor != null ? approvedCursor.getCount() : 0;
+                denied = deniedCursor != null ? deniedCursor.getCount() : 0;
 
-            // Close cursors
-            if (allCursor != null) allCursor.close();
-            if (pendingCursor != null) pendingCursor.close();
-            if (approvedCursor != null) approvedCursor.close();
-            if (deniedCursor != null) deniedCursor.close();
+                // Close cursors
+                if (allCursor != null) allCursor.close();
+                if (pendingCursor != null) pendingCursor.close();
+                if (approvedCursor != null) approvedCursor.close();
+                if (deniedCursor != null) deniedCursor.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                // Handle error, perhaps show a toast or log
+                runOnUiThread(() -> Toast.makeText(AdminLoanViewerActivity.this, "Error loading statistics", Toast.LENGTH_SHORT).show());
+            }
 
+            int finalTotal = total;
+            int finalPending = pending;
+            int finalApproved = approved;
             runOnUiThread(() -> {
-                textViewTotalLoans.setText("Total: " + total);
-                textViewApprovedLoans.setText("Approved: " + approved);
-                textViewPendingLoans.setText("Pending: " + pending);
+                textViewTotalLoans.setText("Total: " + finalTotal);
+                textViewApprovedLoans.setText("Approved: " + finalApproved);
+                textViewPendingLoans.setText("Pending: " + finalPending);
 
                 // Show statistics card if there are loans
-                cardStatistics.setVisibility(total > 0 ? View.VISIBLE : View.GONE);
+                cardStatistics.setVisibility(finalTotal > 0 ? View.VISIBLE : View.GONE);
             });
         }).start();
     }
@@ -159,9 +169,9 @@ public class AdminLoanViewerActivity extends AppCompatActivity {
             runOnUiThread(() -> {
                 showLoading(false);
 
-                // Refresh the pager adapter
+                // Refresh only the current fragment to avoid crashes if other fragments are not created
                 if (pagerAdapter != null) {
-                    pagerAdapter.refreshAllFragments();
+                    pagerAdapter.refreshFragment(viewPager.getCurrentItem());
                 }
 
                 // Reload statistics

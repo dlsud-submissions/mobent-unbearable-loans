@@ -6,6 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -76,6 +80,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Create table statements
      * ----------
      **/
+
+
 
     // Create Employee table
     private static final String CREATE_EMPLOYEE_TABLE = "CREATE TABLE " + TABLE_EMPLOYEE + "("
@@ -209,6 +215,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return baseId;
     }
 
+
     // Hash password using SHA-256
     private String hashPassword(String password) {
         try {
@@ -225,6 +232,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             throw new RuntimeException(e);
         }
     }
+
 
     // Register employee with auto-generated ID
     public boolean registerEmployee(String firstName, String middleInitial,

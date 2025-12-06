@@ -52,4 +52,11 @@ public class LoanPagerAdapter extends FragmentStateAdapter {
             }
         }
     }
+
+    // Added method to refresh only the fragment at a specific position
+    public void refreshFragment(int position) {
+        if (position >= 0 && position < fragments.length && fragments[position] != null) {
+            fragments[position].refreshData();
+        }
+    }
 }
