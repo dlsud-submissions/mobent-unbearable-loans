@@ -161,7 +161,7 @@ public class HomeAdminActivity extends AppCompatActivity {
 
     private void logout() {
         // Navigate back to admin login screen
-        Intent intent = new Intent(HomeAdminActivity.this, LoginAdminActivity.class);
+        Intent intent = new Intent(HomeAdminActivity.this, LandingActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
