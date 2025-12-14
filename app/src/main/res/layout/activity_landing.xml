@@ -153,10 +153,9 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/logo2"
-                            android:scaleType="centerCrop"
                             android:padding="12dp"
-                        />
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/loginbear" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -312,7 +311,7 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/logo2"
+                            android:src="@drawable/adminlogin"
                             android:scaleType="centerCrop"
                             android:padding="12dp"
                             />

@@ -156,7 +156,8 @@ public class LoginActivity extends AppCompatActivity {
         if (imagesToUse.length == 0) return;
 
         // Divide character count by 3 to change image every 3 characters
-        int imageIndex = characterCount / 3;
+        int imageIndex = characterCount /
+                3;
 
         // For username: Keep last image when at 21+ characters (index 7)
         // For password: Keep last image when exceeding array length
